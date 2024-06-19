@@ -1,0 +1,16 @@
+<!-- templates/search.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="search-container">
+    <h2>Search</h2>
+    <form class="search-form">
+        <div class="form-group">
+            <input type="text" id="search" name="search" placeholder="Search for lost items" required>
+        </div>
+        <button type="submit">Search</button>
+    </form>
+</div>
+{% endblock %}
+

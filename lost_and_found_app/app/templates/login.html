@@ -1,0 +1,31 @@
+<!-- templates/login.html -->
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+    <form class="login-form" method="POST" action="{{ url_for('main.login') }}">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="social-login">
+        <p>Or login with:</p>
+        <a href="{{ url_for('main.google_login') }}" class="btn btn-google">Login with Google</a>
+        <a href="{{ url_for('main.facebook_login') }}" class="btn btn-facebook">Login with Facebook</a>
+    </div>
+</div>
+{% endblock %}
+
