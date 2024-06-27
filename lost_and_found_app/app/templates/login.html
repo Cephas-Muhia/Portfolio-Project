@@ -1,30 +1,44 @@
-<!-- templates/login.html -->
 {% extends 'base.html' %}
 
-{% block head %}
-    {{ super() }}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-{% endblock %}
+{% block title %}Login - Lost & Found{% endblock %}
 
 {% block content %}
-<div class="login-container">
-    <h2>Login</h2>
-    <form class="login-form" method="POST" action="{{ url_for('main.login') }}">
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" placeholder="Enter your password" required>
-        </div>
-        <button type="submit">Login</button>
-    </form>
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Login</h2>
+                <form action="{{ url_for('main.login') }}" method="POST" class="needs-validation" novalidate>
+                    <!-- Form fields for login -->
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required>
+                        <div class="invalid-feedback">Please enter your username.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                        <div class="invalid-feedback">Please enter your password.</div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                </form>
 
-    <div class="social-login">
-        <p>Or login with:</p>
-        <a href="{{ url_for('main.google_login') }}" class="btn btn-google">Login with Google</a>
-        <a href="{{ url_for('main.facebook_login') }}" class="btn btn-facebook">Login with Facebook</a>
+                <!-- Social login buttons -->
+                <div class="text-center mt-3">
+                    <p class="mb-2">Or login with:</p>
+                    <a href="{{ url_for('main.google_auth') }}" class="btn btn-google btn-block"><i class="fab fa-google"></i> Login with Google</a>
+                    <a href="{{ url_for('main.facebook_auth') }}" class="btn btn-facebook btn-block"><i class="fab fa-facebook"></i> Login with Facebook</a>
+                </div>
+
+                {% if current_user.is_authenticated %}
+                <hr>
+                <p class="text-center">Logged in as {{ current_user.username }}. <a href="{{ url_for('main.logout') }}">Logout</a></p>
+                {% else %}
+                <hr>
+                <p class="text-center">Don't have an account? <a href="{{ url_for('main.register') }}">Register here</a>.</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
