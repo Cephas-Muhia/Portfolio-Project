@@ -1,16 +1,23 @@
-<!-- templates/search.html -->
-
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="search-container">
-    <h2>Search</h2>
-    <form class="search-form">
-        <div class="form-group">
-            <input type="text" id="search" name="search" placeholder="Search for lost items" required>
-        </div>
-        <button type="submit">Search</button>
-    </form>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Search Items</h1>
+        <form action="{{ url_for('main.search') }}" method="POST" class="search-form">
+            <div class="form-group">
+                <label for="search_term">Search Term:</label>
+                <input type="text" id="search_term" name="search_term" class="form-control" placeholder="Enter search term..." required>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
 

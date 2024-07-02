@@ -1,28 +1,30 @@
-<!-- templates/report_found.html -->
+{% extends "base.html" %}
 
-{% extends 'base.html' %}
+{% block title %}Report Found Item{% endblock %}
 
 {% block content %}
-<div class="report-found-container">
-    <h2>Report Found Item</h2>
-    <form class="report-found-form">
+<div class="container">
+    <h2 class="text-center">Report Found Item</h2>
+    <form method="POST" action="{{ url_for('main.report_found') }}" enctype="multipart/form-data" class="report-form">
         <div class="form-group">
             <label for="description">Description:</label>
-            <input type="text" id="description" name="description" placeholder="Enter item description" required>
-        </div>
-        <div class="form-group">
-            <label for="date">Date Found:</label>
-            <input type="date" id="date" name="date" required>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter a detailed description of the found item..." required></textarea>
         </div>
         <div class="form-group">
             <label for="location">Location:</label>
-            <input type="text" id="location" name="location" placeholder="Enter location where item was found" required>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Where was the item found?" required>
         </div>
         <div class="form-group">
-            <label for="image">Upload Image:</label>
-            <input type="file" id="image" name="image">
+            <label for="date_found">Date Found:</label>
+            <input type="date" class="form-control" id="date_found" name="date_found" required>
         </div>
-        <button type="submit">Report</button>
+        <div class="form-group">
+            <label for="photo">Photo:</label>
+            <input type="file" class="form-control-file" id="photo" name="photo">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
     </form>
 </div>
 {% endblock %}

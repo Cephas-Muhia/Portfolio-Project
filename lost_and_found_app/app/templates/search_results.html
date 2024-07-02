@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Search Results for "{{ search_term }}"</h2>
+
+    <!-- Lost Items -->
+    <div class="section">
+        <h3>Lost Items</h3>
+        {% if lost_items %}
+            <ul class="item-list">
+                {% for item in lost_items %}
+                    <li class="item">
+                        <div class="item-details">
+                            <strong>Description:</strong> {{ item.description }}<br>
+                            <strong>Date Reported Lost:</strong> {{ item.date_reported }}<br>
+                            <strong>Location:</strong> {{ item.location }}<br>
+                            {% if item.photo %}
+                                <img src="{{ url_for('static', filename=item.photo) }}" alt="Lost Item Photo" class="item-photo">
+                            {% else %}
+                                <p>No photo available</p>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No lost items found.</p>
+        {% endif %}
+    </div>
+
+    <!-- Found Items -->
+    <div class="section">
+        <h3>Found Items</h3>
+        {% if found_items %}
+            <ul class="item-list">
+                {% for item in found_items %}
+                    <li class="item">
+                        <div class="item-details">
+                            <strong>Description:</strong> {{ item.description }}<br>
+                            <strong>Date Reported Found:</strong> {{ item.date_reported }}<br>
+                            <strong>Location Found:</strong> {{ item.location }}<br>
+                            Reported By: {{ item.user.username }}<br>
+                            {% if item.photo %}
+                                <img src="{{ url_for('static', filename=item.photo) }}" alt="Found Item Photo" class="item-photo">
+                            {% else %}
+                                <p>No photo available</p>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No found items found.</p>
+        {% endif %}
+    </div>
+
+    <div class="text-center">
+        <a href="{{ url_for('main.search') }}" class="btn btn-primary">Perform Another Search</a>
+    </div>
+</div>
+{% endblock %}
+
