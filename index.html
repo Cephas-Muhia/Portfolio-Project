@@ -1,14 +1,69 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<div class="content">
-    <div class="text-center" style="color: #000000;">
-        <h1 style="font-size: 3em; font-weight: bold; margin-bottom: 20px;">Welcome to Lost & Found App</h1>
-        <p style="font-size: 1.5em; margin-bottom: 30px;">
-            The Lost & Found App helps you report and locate lost items. Use our platform to connect with others and improve the chances of finding your lost belongings.
-        </p>
-        <p><a class="btn btn-primary btn-lg" href="https://kefa.my.canva.site/project-landing-page" style="padding: 15px 30px; font-size: 1.2em;">Explore the Lost & Found App</a></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Lost & Found App</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        .content {
+            background-image: url('path/to/your/lost_found_image.jpg');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 0;
+        }
+        .text-center {
+            color: #000000;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .text-center h1 {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .text-center p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="text-center">
+            <h1>Welcome to Lost & Found App</h1>
+            <p>
+                The Lost & Found App helps you report and locate lost items. Use our platform to connect with others and improve the chances of finding your lost belongings.
+            </p>
+            <p>
+                <a class="btn" href="https://kefa.my.canva.site/project-landing-page">Explore the Lost & Found App</a>
+            </p>
+        </div>
     </div>
-</div>
-{% endblock %}
+</body>
+</html>
 
