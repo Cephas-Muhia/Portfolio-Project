@@ -11,54 +11,31 @@ The Lost & Found App is a centralized platform designed to help users report and
 
 ## File Tree
 
+.
 ├── app
-│ ├── init.py
-│ ├── models.py
-│ ├── routes.py
-│ ├── static
-│ │ ├── css
-│ │ │ └── styles.css
-│ │ ├── images
-│ │ │ └── background.jpg
-│ │ └── js
-│ │ └── scripts.js
-│ └── templates
-│ ├── base.html
-│ ├── facebook_login.html
-│ ├── google_login.html
-│ ├── index.html
-│ ├── login.html
-│ ├── register.html
-│ ├── report_found.html
-│ ├── report_lost.html
-│ └── search.html
+│   ├── __init__.py
+│   ├── models.py
+│   ├── routes.py
+│   ├── static
+│   │   ├── css
+│   │   │   └── styles.css
+│   │   ├── images
+│   │   │   └── background.jpg
+│   │   └── js
+│   │       └── scripts.js
+│   └── templates
+│       ├── base.html
+│       ├── facebook_login.html
+│       ├── google_login.html
+│       ├── index.html
+│       ├── login.html
+│       ├── register.html
+│       ├── report_found.html
+│       ├── report_lost.html
+│       └── search.html
 ├── config.py
 ├── instance
-│ └── config.py
-└── run.py├── app
-│ ├── init.py
-│ ├── models.py
-│ ├── routes.py
-│ ├── static
-│ │ ├── css
-│ │ │ └── styles.css
-│ │ ├── images
-│ │ │ └── background.jpg
-│ │ └── js
-│ │ └── scripts.js
-│ └── templates
-│ ├── base.html
-│ ├── facebook_login.html
-│ ├── google_login.html
-│ ├── index.html
-│ ├── login.html
-│ ├── register.html
-│ ├── report_found.html
-│ ├── report_lost.html
-│ └── search.html
-├── config.py
-├── instance
-│ └── config.py
+│   └── config.py
 └── run.py
 
 
