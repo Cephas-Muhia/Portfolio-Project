@@ -2,9 +2,6 @@ This is my portfolio project known as Lost & Found App
 
 Author:CEPHAS MUHIA: Cephaschronixx@gmail.com
 
-```markdown
-# Lost & Found App
-
 ## Introduction
 The Lost & Found App is a centralized platform designed to help users report and find lost items with ease. Whether it's your favorite watch, a cherished piece of jewelry, or an essential document, this app aims to make the recovery process less stressful and more efficient. This project was developed as part of a portfolio project for Holberton School.
 
@@ -14,34 +11,56 @@ The Lost & Found App is a centralized platform designed to help users report and
 
 ## File Tree
 
-```
-.
 ├── app
-│   ├── __init__.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── static
-│   │   ├── css
-│   │   │   └── styles.css
-│   │   ├── images
-│   │   │   └── background.jpg
-│   │   └── js
-│   │       └── scripts.js
-│   └── templates
-│       ├── base.html
-│       ├── facebook_login.html
-│       ├── google_login.html
-│       ├── index.html
-│       ├── login.html
-│       ├── register.html
-│       ├── report_found.html
-│       ├── report_lost.html
-│       └── search.html
+│ ├── init.py
+│ ├── models.py
+│ ├── routes.py
+│ ├── static
+│ │ ├── css
+│ │ │ └── styles.css
+│ │ ├── images
+│ │ │ └── background.jpg
+│ │ └── js
+│ │ └── scripts.js
+│ └── templates
+│ ├── base.html
+│ ├── facebook_login.html
+│ ├── google_login.html
+│ ├── index.html
+│ ├── login.html
+│ ├── register.html
+│ ├── report_found.html
+│ ├── report_lost.html
+│ └── search.html
 ├── config.py
 ├── instance
-│   └── config.py
+│ └── config.py
+└── run.py├── app
+│ ├── init.py
+│ ├── models.py
+│ ├── routes.py
+│ ├── static
+│ │ ├── css
+│ │ │ └── styles.css
+│ │ ├── images
+│ │ │ └── background.jpg
+│ │ └── js
+│ │ └── scripts.js
+│ └── templates
+│ ├── base.html
+│ ├── facebook_login.html
+│ ├── google_login.html
+│ ├── index.html
+│ ├── login.html
+│ ├── register.html
+│ ├── report_found.html
+│ ├── report_lost.html
+│ └── search.html
+├── config.py
+├── instance
+│ └── config.py
 └── run.py
-```
+
 
 ## Installation
 To install and run the Lost & Found App locally, follow these steps:
@@ -84,7 +103,7 @@ Once the app is running, you can access it in your web browser at `http://127.0.
 - **Search and View Items**: Users can search for reported lost items using filters like date and location.
 
 ## Contributing
-We welcome contributions to the Lost & Found App! To contribute:
+I welcome contributions to the Lost & Found App! To contribute:
 
 1. **Fork the repository:**
    Click the "Fork" button at the top right of this repository.
@@ -113,17 +132,12 @@ We welcome contributions to the Lost & Found App! To contribute:
    Go to your forked repository on GitHub and click the "New pull request" button.
 
 ## Related Projects
-
-
-
+---There is no related project yet.---
 ## Licensing
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
-
----
+---This project is yet to be licensed.---
 
 Feel free to reach out to me for any questions or collaboration opportunities!
 
 - **GitHub**: [Cephas Muhia](https://github.com/Cephas-Muhia/Portfolio-Project)
 - **LinkedIn**: [Cephas Muhia](https://www.linkedin.com/in/cephas-muhia/)
 - **Twitter**: [Cephas Muhia](https://x.com/CephasMuhia)
-```
