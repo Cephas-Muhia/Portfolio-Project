@@ -185,7 +185,7 @@ def report_found():
         else:
             photo_path = None
 
-        found_item = FoundItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
+        found_item = FoundItem(description=description, location=location, photo=photo, user_id=current_user.id, date_reported=date_reported)
         db.session.add(found_item)
         db.session.commit()
 

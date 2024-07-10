@@ -409,6 +409,7 @@ h1 {
     text-align: center;
 }
 
+
 /*search_result_static/css/styles.css*/
 body {
     font-family: Arial, sans-serif;
@@ -461,6 +462,7 @@ h2, h3 {
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .btn-primary {
     background-color: #3b8bbe; /* Darker blue button */
     color: #fff;
@@ -474,5 +476,5 @@ h2, h3 {
 
 .btn-primary:hover {
     background-color: #0056b3; /* Darker hover state */
-}
+} 
 
