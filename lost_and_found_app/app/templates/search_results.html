@@ -16,7 +16,9 @@
                             <strong>Date Reported Lost:</strong> {{ item.date_reported }}<br>
                             <strong>Location:</strong> {{ item.location }}<br>
                             {% if item.photo %}
-                                <img src="{{ url_for('static', filename=item.photo) }}" alt="Lost Item Photo" class="item-photo">
+                                <a href="{{ url_for('static', filename='uploads/' ~ item.photo) }}" target="_blank">
+                                    <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Lost Item Photo" class="item-photo">
+                                </a>
                             {% else %}
                                 <p>No photo available</p>
                             {% endif %}
@@ -42,7 +44,9 @@
                             <strong>Location Found:</strong> {{ item.location }}<br>
                             Reported By: {{ item.user.username }}<br>
                             {% if item.photo %}
-                                <img src="{{ url_for('static', filename=item.photo) }}" alt="Found Item Photo" class="item-photo">
+                                <a href="{{ url_for('static', filename='uploads/' ~ item.photo) }}" target="_blank">
+                                    <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Found Item Photo" class="item-photo">
+                                </a>
                             {% else %}
                                 <p>No photo available</p>
                             {% endif %}

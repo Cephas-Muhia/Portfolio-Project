@@ -6,6 +6,8 @@ from .models import User, LostItem, FoundItem
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime 
+from werkzeug.utils import secure_filename
+import os
 
 # Create a Blueprint for the main routes
 main = Blueprint('main', __name__, template_folder='templates')
@@ -144,11 +146,18 @@ def report_lost():
     if request.method == 'POST':
         description = request.form.get('description')
         location = request.form.get('location')
-        photo = request.form.get('photo')  # Handle file upload as needed
         date_lost_str = request.form.get('date_lost')
         date_reported = datetime.strptime(date_lost_str, '%Y-%m-%d') if date_lost_str else datetime.utcnow()
 
-        lost_item = LostItem(description=description, location=location, photo=photo, user_id=current_user.id, date_reported=date_reported)
+        photo = request.files['photo']
+        if photo:
+            filename = secure_filename(photo.filename)
+            photo_path = os.path.join('static/uploads', filename)
+            photo.save(photo_path)
+        else:
+            photo_path = None
+
+        lost_item = LostItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
         db.session.add(lost_item)
         db.session.commit()
 
@@ -157,6 +166,7 @@ def report_lost():
 
     return render_template('report_lost.html')
 
+
 # Report found items route
 @main.route('/report_found', methods=['GET', 'POST'])
 @login_required
@@ -164,11 +174,18 @@ def report_found():
     if request.method == 'POST':
         description = request.form.get('description')
         location = request.form.get('location')
-        photo = request.form.get('photo')  # Handle file upload as needed
         date_found_str = request.form.get('date_found')
         date_reported = datetime.strptime(date_found_str, '%Y-%m-%d') if date_found_str else datetime.utcnow()
 
-        found_item = FoundItem(description=description, location=location, photo=photo, user_id=current_user.id, date_reported=date_reported)
+        photo = request.files['photo']
+        if photo:
+            filename = secure_filename(photo.filename)
+            photo_path = os.path.join('static/uploads', filename)
+            photo.save(photo_path)
+        else:
+            photo_path = None
+
+        found_item = FoundItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
         db.session.add(found_item)
         db.session.commit()
 
@@ -176,6 +193,7 @@ def report_found():
         return redirect(url_for('main.home'))
 
     return render_template('report_found.html')
+
 
 # Search route
 @main.route('/search', methods=['GET', 'POST'])

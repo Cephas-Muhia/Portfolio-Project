@@ -455,9 +455,12 @@ h2, h3 {
 .item-photo {
     max-width: 100%;
     height: auto;
-    margin-top: 10px;
+    display: block;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 .btn-primary {
     background-color: #3b8bbe; /* Darker blue button */
     color: #fff;
