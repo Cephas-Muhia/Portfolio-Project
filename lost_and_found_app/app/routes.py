@@ -69,7 +69,7 @@ def register():
 @main.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+         return redirect(url_for('main.profile'))  # Redirect to profile if already logged in
 
     if request.method == 'POST':
         username = request.form.get('username')
@@ -81,7 +81,7 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user, remember=request.form.get('remember', False))
                 flash('Logged in successfully.', 'success')
-                return redirect(url_for('main.home'))
+                return redirect(url_for('main.profile'))  # Redirect to profile if already logged in
             else:
                 flash('Login Unsuccessful. Incorrect password.', 'danger')
         else:
@@ -116,7 +116,8 @@ def google_auth():
         db.session.commit()
 
     login_user(user)
-    return redirect(url_for('main.home'))  # Redirect to the main home page after login
+    return redirect(url_for('main.profile'))  # Redirect to profile if login is succesiful
+
 
 # Facebook login route
 @main.route('/facebook-auth')
@@ -137,7 +138,20 @@ def facebook_auth():
         db.session.commit()
 
     login_user(user)
-    return redirect(url_for('main.home'))  # Redirect to the main home page after login
+    return redirect(url_for('main.profile'))  # Redirect to profile if login is succesiful
+
+
+@main.route('/profile')
+@login_required  # Ensures user must be logged in to access this route
+def profile():
+     # Fetch user details from the database using current_user.id
+    user = User.query.get(current_user.id)
+    if user:
+        return render_template('profile.html', user=user)
+    else:
+        flash('User not found.', 'danger')
+        return redirect(url_for('main.home'))  # Redirect to home or another page if user is not found
+
 
 # Report lost item route
 @main.route('/report_lost', methods=['GET', 'POST'])

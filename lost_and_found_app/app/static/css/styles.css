@@ -365,7 +365,7 @@ body {
 }
 
 .container {
-    max-width: 600px; /* Adjust container width as needed */
+    max-width: 400px; /* Adjust container width as needed */
     margin: 100px auto; /* Centering the container vertically */
     padding: 20px;
     background-color: #ffffff; /* White background */

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    /* CSS styles here */
+    body {
+        background-image: url("{{ url_for('static', filename='images/Dog.jpeg') }}");
+        background-size: cover;
+        background-position: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        height: 100vh; /* Ensure full viewport height */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: flex-end; /* Align items to bottom */
+    }
+
+    .container {
+        width: 80%; /* Adjust width as needed */
+        background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for better readability */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 50px; /* Space from the bottom */
+    }
+
+    .profile-title {
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #333;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-details {
+        font-size: 18px;
+        line-height: 1.6;
+        margin-top: 20px;
+    }
+
+    .profile-details strong {
+        color: #007bff;
+    }
+
+    .profile-details p {
+        margin-bottom: 10px;
+    }
+
+    .profile-details p:last-child {
+        margin-bottom: 0;
+    }
+</style>
+
+<div class="container">
+    <h1 class="profile-title">User Profile</h1>
+    <div class="profile-details">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <!-- Add more details as needed -->
+    </div>
+</div>
+{% endblock %}
+
