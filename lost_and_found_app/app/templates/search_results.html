@@ -1,6 +1,81 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2, h3 {
+        color: #3b8bbe;
+        text-align: center;
+    }
+
+    .section {
+        margin-bottom: 30px;
+    }
+
+    .item-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .item {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .item-photo {
+        max-width: 100px;
+        cursor: pointer;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 <div class="container">
     <h2 class="text-center">Search Results for "{{ search_term }}"</h2>
 
@@ -16,7 +91,7 @@
                             <strong>Date Reported Lost:</strong> {{ item.date_reported }}<br>
                             <strong>Location:</strong> {{ item.location }}<br>
                             {% if item.photo %}
-                                <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Lost Item Photo" class="item-photo">
+                                <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Lost Item Photo" class="item-photo" onclick="openModal(this)">
                             {% else %}
                                 <p>No photo available</p>
                             {% endif %}
@@ -42,7 +117,7 @@
                             <strong>Location Found:</strong> {{ item.location }}<br>
                             Reported By: {{ item.user.username }}<br>
                             {% if item.photo %}
-                                <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Found Item Photo" class="item-photo">
+                                <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Found Item Photo" class="item-photo" onclick="openModal(this)">
                             {% else %}
                                 <p>No photo available</p>
                             {% endif %}
@@ -59,5 +134,34 @@
         <a href="{{ url_for('main.search') }}" class="btn btn-primary">Perform Another Search</a>
     </div>
 </div>
+
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modalImage">
+</div>
+
+<script>
+    function openModal(img) {
+        var modal = document.getElementById("myModal");
+        var modalImg = document.getElementById("modalImage");
+        modal.style.display = "block";
+        modalImg.src = img.src;
+    }
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function() {
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
+    }
+
+    // Close the modal when clicking anywhere outside of the image
+    window.onclick = function(event) {
+        var modal = document.getElementById("myModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 {% endblock %}
 

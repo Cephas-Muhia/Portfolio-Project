@@ -17,7 +17,9 @@ def create_app():
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your_default_secret_key')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///site.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+    app.config['UPLOAD_FOLDER'] = 'static/uploads'
+    app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+    
     # Initialize extensions
     db.init_app(app)
     migrate.init_app(app, db)

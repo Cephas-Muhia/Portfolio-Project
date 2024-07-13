@@ -158,26 +158,46 @@ def profile():
 @login_required
 def report_lost():
     if request.method == 'POST':
+        # Debugging statements for form data
+        print("Received POST request for reporting lost item")
         description = request.form.get('description')
         location = request.form.get('location')
         date_lost_str = request.form.get('date_lost')
+        print(f"Description: {description}, Location: {location}, Date Lost: {date_lost_str}")
+
         date_reported = datetime.strptime(date_lost_str, '%Y-%m-%d') if date_lost_str else datetime.utcnow()
+        print(f"Date Reported: {date_reported}")
 
         photo = request.files['photo']
         if photo:
             filename = secure_filename(photo.filename)
             photo_path = os.path.join('static/uploads', filename)
-            photo.save(photo_path)
+            print(f"Photo received: {photo}")
+            print(f"Photo path: {photo_path}")  # Debugging statement
+            try:
+                photo.save(photo_path)
+                print("Photo saved successfully")
+                photo_url = url_for('static', filename=f'uploads/{filename}')
+                print(f"Photo URL: {photo_url}")
+            except Exception as e:
+                print(f"Error saving photo: {e}")
         else:
             photo_path = None
+            photo_url = None
+            print("No photo received")
 
-        lost_item = LostItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
-        db.session.add(lost_item)
-        db.session.commit()
+        try:
+            lost_item = LostItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
+            db.session.add(lost_item)
+            db.session.commit()
+            print("Lost item added to the database successfully")
+        except Exception as e:
+            print(f"Error adding lost item to the database: {e}")
 
         flash('Your lost item report has been created successfully! Thank you for using the app.', 'success')
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.profile'))
 
+    print("GET request for reporting lost item")
     return render_template('report_lost.html')
 
 
@@ -186,26 +206,46 @@ def report_lost():
 @login_required
 def report_found():
     if request.method == 'POST':
+        # Debugging statements for form data
+        print("Received POST request for reporting found item")
         description = request.form.get('description')
         location = request.form.get('location')
         date_found_str = request.form.get('date_found')
+        print(f"Description: {description}, Location: {location}, Date Found: {date_found_str}")
+
         date_reported = datetime.strptime(date_found_str, '%Y-%m-%d') if date_found_str else datetime.utcnow()
+        print(f"Date Reported: {date_reported}")
 
         photo = request.files['photo']
         if photo:
             filename = secure_filename(photo.filename)
             photo_path = os.path.join('static/uploads', filename)
-            photo.save(photo_path)
+            print(f"Photo received: {photo}")
+            print(f"Photo path: {photo_path}")  # Debugging statement
+            try:
+                photo.save(photo_path)
+                print("Photo saved successfully")
+                photo_url = url_for('static', filename=f'uploads/{filename}')
+                print(f"Photo URL: {photo_url}")
+            except Exception as e:
+                print(f"Error saving photo: {e}")
         else:
             photo_path = None
+            photo_url = None
+            print("No photo received")
 
-        found_item = FoundItem(description=description, location=location, photo=photo, user_id=current_user.id, date_reported=date_reported)
-        db.session.add(found_item)
-        db.session.commit()
+        try:
+            found_item = FoundItem(description=description, location=location, photo=photo_path, user_id=current_user.id, date_reported=date_reported)
+            db.session.add(found_item)
+            db.session.commit()
+            print("Found item added to the database successfully")
+        except Exception as e:
+            print(f"Error adding found item to the database: {e}")
 
         flash('Your found item report has been created successfully! Thank you for using the app.', 'success')
-        return redirect(url_for('main.home'))
+        return redirect(url_for('main.profile'))
 
+    print("GET request for reporting found item")
     return render_template('report_found.html')
 
 
