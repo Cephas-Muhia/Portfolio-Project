@@ -160,13 +160,20 @@ def report_lost():
     if request.method == 'POST':
         description = request.form['description']
         location = request.form['location']
+        date_lost_str = request.form.get('date_lost')
         date_reported = datetime.utcnow()
-        date_lost = request.form.get('date_lost', None)
-        
+
+        # Convert date_lost_str to datetime object
+        try:
+            date_lost = datetime.strptime(date_lost_str, '%Y-%m-%d')
+        except ValueError:
+            flash('Invalid date format for the date lost.', 'danger')
+            return redirect(url_for('main.report_lost'))
+
         print(f"Received POST request for reporting lost item\nDescription: {description}, Location: {location}, Date Lost: {date_lost}")
         print(f"Date Reported: {date_reported}")
 
-        photo = request.files['photo']
+        photo = request.files.get('photo')
         if photo:
             filename = secure_filename(photo.filename)
             photo_path = os.path.join('app/static/uploads', filename)
@@ -179,25 +186,34 @@ def report_lost():
                 print(f"Photo URL: {photo_url}")
             except Exception as e:
                 print(f"Error saving photo: {e}")
+                photo_url = None
         else:
             filename = None
             photo_url = None
             print("No photo received")
 
         try:
-            lost_item = LostItem(description=description, location=location, photo=filename, user_id=current_user.id, date_reported=date_reported)
+            lost_item = LostItem(
+                description=description,
+                location=location,
+                photo=filename,
+                date_lost=date_lost,
+                date_reported=date_reported,
+                user_id=current_user.id
+            )
             db.session.add(lost_item)
             db.session.commit()
             print("Lost item added to the database successfully")
         except Exception as e:
             print(f"Error adding lost item to the database: {e}")
+            flash('There was an error saving your report. Please try again.', 'danger')
+            return redirect(url_for('main.report_lost'))
 
         flash('Your lost item report has been created successfully! Thank you for using the app.', 'success')
         return redirect(url_for('main.profile'))
 
     print("GET request for reporting lost item")
     return render_template('report_lost.html')
-
 
 # Found_items route
 @main.route('/report_found', methods=['GET', 'POST'])
