@@ -162,6 +162,7 @@ def report_lost():
         location = request.form['location']
         date_lost_str = request.form.get('date_lost')
         date_reported = datetime.utcnow()
+        reporter_contact = request.form['reporter_contact'] 
 
         # Convert date_lost_str to datetime object
         try:
@@ -170,7 +171,7 @@ def report_lost():
             flash('Invalid date format for the date lost.', 'danger')
             return redirect(url_for('main.report_lost'))
 
-        print(f"Received POST request for reporting lost item\nDescription: {description}, Location: {location}, Date Lost: {date_lost}")
+        print(f"Received POST request for reporting lost item\nDescription: {description}, Location: {location}, Date Lost: {date_lost}, Reporter_contact: {reporter_contact}")
         print(f"Date Reported: {date_reported}")
 
         photo = request.files.get('photo')
@@ -199,6 +200,7 @@ def report_lost():
                 photo=filename,
                 date_lost=date_lost,
                 date_reported=date_reported,
+                reporter_contact=reporter_contact,
                 user_id=current_user.id
             )
             db.session.add(lost_item)
@@ -224,8 +226,9 @@ def report_found():
         location = request.form['location']
         date_reported = datetime.utcnow()
         date_found = request.form.get('date_found', None)
+        reporter_contact = request.form['reporter_contact']
         
-        print(f"Received POST request for reporting found item\nDescription: {description}, Location: {location}, Date Found: {date_found}")
+        print(f"Received POST request for reporting found item\nDescription: {description}, Location: {location}, Date Found: {date_found}, reporter_contact: {reporter_contact}")
         print(f"Date Reported: {date_reported}")
 
         photo = request.files['photo']
@@ -247,7 +250,7 @@ def report_found():
             print("No photo received")
 
         try:
-            found_item = FoundItem(description=description, location=location, photo=filename, user_id=current_user.id, date_reported=date_reported)
+            found_item = FoundItem(description=description, location=location, photo=filename, user_id=current_user.id, date_reported=date_reported, reporter_contact=reporter_contact)
             db.session.add(found_item)
             db.session.commit()
             print("Found item added to the database successfully")

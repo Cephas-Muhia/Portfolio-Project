@@ -15,7 +15,8 @@ class LostItem(db.Model):
     description = db.Column(db.String(300), nullable=False)
     location = db.Column(db.String(200), nullable=False)
     photo = db.Column(db.String(200), nullable=True)
-    date_lost = db.Column(db.DateTime, nullable=False)  
+    date_lost = db.Column(db.DateTime, nullable=False)
+    reporter_contact = db.Column(db.Integer, nullable=False)
     date_reported = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('lost_items', lazy=True))
@@ -26,6 +27,7 @@ class FoundItem(db.Model):
     location = db.Column(db.String(200), nullable=False)
     photo = db.Column(db.String(200), nullable=True)
     date_reported = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    reporter_contact = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('found_items', lazy=True))
 

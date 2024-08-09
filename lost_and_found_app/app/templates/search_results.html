@@ -91,6 +91,8 @@
 			    <strong>Date Lost:</strong> {{ item.date_lost }}<br>
                             <strong>Date Reported Lost:</strong> {{ item.date_reported }}<br>
                             <strong>Location:</strong> {{ item.location }}<br>
+			    Reported By: {{ item.user.username }}<br>
+			    <strong>Reporter_Contact:</strong>{{ item.reporter_contact }}<br>
                             {% if item.photo %}
                                 <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Lost Item Photo" class="item-photo" onclick="openModal(this)">
                             {% else %}
@@ -116,7 +118,8 @@
                             <strong>Description:</strong> {{ item.description }}<br>
                             <strong>Date Reported Found:</strong> {{ item.date_reported }}<br>
                             <strong>Location Found:</strong> {{ item.location }}<br>
-                            Reported By: {{ item.user.username }}<br>
+			    Reported By: {{ item.user.username }}<br>
+			    <strong>Reporter_Contact:</strong>{{ item.reporter_contact }}<br>
                             {% if item.photo %}
                                 <img src="{{ url_for('static', filename='uploads/' ~ item.photo) }}" alt="Found Item Photo" class="item-photo" onclick="openModal(this)">
                             {% else %}
